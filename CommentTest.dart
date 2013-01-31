@@ -204,8 +204,29 @@ library comment_test;
        // Code comment without leading `*`
  */
 class CommentTester {
+  /// This doc comment for aNumber does NOT show up.
   int aNumber;
   
+  int _a;
+  int _b;
+
+  /// This doc comment on a's getter shows up fine.
+  int get a => _a;
+      set a(int value) => _a = value;
+
+  
+  /**
+   * This is a comment on b's getter.
+   * It's preferable NOT to have separate comments for
+   * the setter and getter.
+   */
+  int get b => _b;
+  
+  /**
+   * This is a comment on b's setter.
+   */
+  set b(int value) => _b = value;
+
   /// Creates a new CommentTester with aNumber set to 0.
   ///
   /// This method's doc uses the `///` form of doc comment.
@@ -218,14 +239,17 @@ class CommentTester {
     aNumber = 0;
   }
   
+  /// doc comment for CommentTester.withNumber
   CommentTester.withNumber(this.aNumber);
   
+  /// doc comment for doSomething
   void doSomething() {
     print('The number is $aNumber.');
   }
   
 }
 
+/// doc comment for SubTester class
 class SubTester extends CommentTester {
   SubTester();
 }
