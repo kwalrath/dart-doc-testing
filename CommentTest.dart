@@ -205,25 +205,33 @@ library comment_test;
  */
 class CommentTester {
   /// This doc comment for aNumber does NOT show up.
+  ///
+  /// See: [http://dartbug.com/8222](bug #8222)
   int aNumber;
   
   int _a;
   int _b;
 
-  /// This doc comment on a's getter shows up fine.
+  /// This doc comment on a's getter shows up fine,
+  /// and can cover both the getter and the setter.
+  /// Compare this to the getter-less [aNumber]
+  /// (any visible doc comment there?) and to [b],
+  /// which has comments on both the getter and the setter.
   int get a => _a;
       set a(int value) => _a = value;
 
   
   /**
    * This is a comment on b's getter.
-   * It's preferable NOT to have separate comments for
-   * the setter and getter.
    */
   int get b => _b;
   
   /**
-   * This is a comment on b's setter.
+   * This, unfortunately, is a comment on b's setter.
+   * Don't do this!
+   *
+   * **Note:** It's better to comment only on the getter,
+   * so the docs for the property will be all in one place.
    */
   set b(int value) => _b = value;
 
@@ -239,17 +247,17 @@ class CommentTester {
     aNumber = 0;
   }
   
-  /// doc comment for CommentTester.withNumber
+  /// This is the doc comment for CommentTester.withNumber.
   CommentTester.withNumber(this.aNumber);
   
-  /// doc comment for doSomething
+  /// This is the doc comment for doSomething().
   void doSomething() {
     print('The number is $aNumber.');
   }
   
 }
 
-/// doc comment for SubTester class
+/// This is the doc comment for the SubTester class.
 class SubTester extends CommentTester {
   SubTester();
 }
