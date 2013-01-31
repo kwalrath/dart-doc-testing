@@ -1,0 +1,243 @@
+[
+  {
+    "kind": "library",
+    "comment": "\nLibrary comments work only for the old library syntax (#library),\nnot the new one.\n",
+    "name": "comment_test",
+    "children": [
+      {
+        "returnType": {
+          "name": "void",
+          "refId": "void"
+        },
+        "kind": "method",
+        "name": "main",
+        "id": "main0()"
+      },
+      {
+        "superclass": {
+          "name": "CommentTester",
+          "refId": "CommentTester"
+        },
+        "kind": "class",
+        "comment": "This is the doc comment for the SubTester class.",
+        "name": "SubTester",
+        "children": [
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "SubTester",
+            "id": "SubTester0()"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "name": "SubTester",
+            "id": "SubTester0()"
+          }
+        ],
+        "id": "SubTester"
+      },
+      {
+        "superclass": {
+          "name": "Object",
+          "refId": "Object"
+        },
+        "kind": "class",
+        "comment": "\nAn example that exercises doc comments.\n\nThis page shows Dartdoc markup,\nalong with conventions for documenting Dart.\nDartdoc markup is defined in section 15.1.2 of the\n[Dart Language Specification](http://www.dartlang.org/docs/spec/).\n\n**Note:**\nDartdoc ignores HTML markup such as <p>.\n\n\n## Doc formatting \n\nTo indicate a paragraph break, use a blank line.\n\n**Terminology note:**\nEven \"blank\" lines usually have characters on them.\nFor block doc comments\neach line conventionally begins with a `*` surrounded by spaces.\nIn a block of `///` comments,\neven \"blank\" lines start with `///`.\n\nHeaders start with `##`.\n(`###` for subheads appears to be implemented but isn't in the spec.)\n\nTo add a code block, use a blank line and then\none or more lines of 5-space indented code.\n\n    // A code sample\n    doSomething();\n   \n### Inline formatting\n \nYou can put *asterisks* (`*`) or _underscores_ (`_`) around\na section of text to italicize it.\nTo get `code font`, use backquotes (```).\n**Bold font** is unofficially supported using double asterisks\nor double underscores.\n\n**Guideline:** Use inline formatting sparingly—only to avoid\nconfusion or to emphasize what's important.\n\nUse braces (`[...]`) to link to identifiers (classes, methods, ...).\nExamples:\n[comment_test],\n[CommentTester], [CommentTester.withNumber],\n[SubTester], [aNumber], and\n[doSomething] but not [doSomething()].\nTo link to a constructor, add a `new` inside the braces:\n[new CommentTester], [new CommentTester.withNumber],\n[new SubTester].\n\nFor other links, specify the absolute URI and (optionally)\nthe link text.\nTo specify the link text, use\n`[s](uri)`—for example, [Dart homepage](http://dartlang.org).\nTo just show the URL, use `<...>`—for example, <http://dartlang.org>.\n\n### Lists\n\nHere's a bulleted list:\n\n* A list item\n* Another list item\n\nSpecify sublists using 4-space indentation.\nPut a blank line before the sublist.\n\n  * A list item (2-space indentation)\n* A list item (0-space indentation)\n* Another list item\n\n    * A sublist (4-space indentation)\n    * Another sublist item:\n      Indented text becomes part of the item,\n      and converts the item into a paragraph.\n    * And another sublist item:\n      \n        Use a blank line before indented text to get a\n        separate paragraph in a list item.\n\nHere's a numbered list.\n\n1. First item\n2. Second item\n1. Third item\n\n\n## Conventions\n\nSee also:\n\n* [Documentation: The dart:io section of the Library Tour](http://www.dartlang.org/docs/dart-up-and-running/ch03.html#ch03-dartio---file-and-socket-io-for-command-line-apps)\n* [Article: An Introduction to the dart:io Library](http://www.dartlang.org/articles/io/)\n\n## Questions\n\n* How do you escape special characters such as a backquote,\nespecially when followed by a character such as a question mark ``` ?\nIf you use triple backquotes,\nthe ``` is outside the <code> element.\n\n* How do you escape comment-start characters (in or outside of a code block)?\n  \n\n## To dos\n\n* Update this doc to reflect `///`.\n* File bugs for formatting issues.\n  \n## Bugs\n  \n### Spec\n\n* How are you supposed to get *bold font*? I expected either asterisks (`*`)\nor doubled asterisks (`**`) and doubled underlines (`__`).\nThe spec says single `*` and `_` are for emphasis, which means\n<em> to me.\n\n* The spec says the number is exactly what you enter in the comment,\nbut the third ordered list item has \"1.\" in the markup\nyet \"3.\" in the output. (I like the implementation better than\nthe spec.)\n     \n* The spec doesn't say anything about indents working\n(either for code blocks or for indented text)\nbut they do (yay).\n\n* The spec doesn't say anything about ###,\nbut it works (yay).\n\n* It'd be nice to be able to define anchors\nso I could point to them from method descriptions.\n(e.g., there's a concept or code that relates to multiple methods.\nI'd like to put it in a section of the class description\nand link to it from the relevant methods.)\n\n* Could we some markup for notes and warnings?\n\n\n### Parser\n\n* Treats `**` or `__` as bold, which isn't in the spec.\n\n* According to the spec [CommentTester] should link to the class,\nnot the constructor.\n\n* Code samples shouldn't need a leading `*` to work.\n(I got one to work without the leading `*`, but usually they don't work.)\n\n* It'd be nice not to need a blank line before a bulleted list—to\nhave a bulleted list automatically end the previous paragraph.\nIt seems like you need a blank line before an indented bulleted list,\nas well.\n\n* List items on multiple lines are autoconverted to paragraphs,\nwhich is a shame. Example:\n\n    * list item on one line\n    * list item on\n[multiple lines](http://www.dartlang.org/docs/dart-up-and-running/)\n    * list item on one line\n\n*  When putting a paragraph under a sublist item,\n   6 spaces is not enough, although it should be (visually);\n   8 is required for a second-level bullet.\n\n\n### HTML\n\n* `<pre>` blocks are `<pre><code>`, which seems redundant.\n\n* [new CommentTester] correctly links to the constructor,\nbut it shouldn't have \"new \" in the output.\n\n* Adjacent `///` lines are missing spaces between the lines in\n  generated output. (See [new CommentTester].)\n\n\n### CSS/formatting\n\n* Paragraphs don't have enough space above them\nwhen following a non-paragraph such as a heading or list.\n\n* The first line of a <pre> section has extra space at the beginning.\n\n### Dart Editor\n\n* Dart Editor doesn't always add a * when you\npress Return/Enter while in the midst of a comment line.\n\n\n## Testing\n\n    // Code comment with leading `*` \n       // Code comment without leading `*`\n",
+        "name": "CommentTester",
+        "children": [
+          {
+            "returnType": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "method",
+            "comment": "This doc comment on a's getter shows up fine,\nand can cover both the getter and the setter.\nCompare this to the getter-less [aNumber]\n(any visible doc comment there?) and to [b],\nwhich has comments on both the getter and the setter.",
+            "name": "a",
+            "id": "a0()"
+          },
+          {
+            "isSetter": true,
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "a=",
+            "children": [
+              {
+                "ref": {
+                  "name": "int",
+                  "refId": "int"
+                },
+                "kind": "param",
+                "name": "value",
+                "id": "value"
+              }
+            ],
+            "id": "a=1()"
+          },
+          {
+            "returnType": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "method",
+            "comment": "\nThis is a comment on b's getter.\n",
+            "name": "b",
+            "id": "b0()"
+          },
+          {
+            "isSetter": true,
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "comment": "\nThis, unfortunately, is a comment on b's setter.\nDon't do this!\n\n**Note:** It's better to comment only on the getter,\nso the docs for the property will be all in one place.\n",
+            "name": "b=",
+            "children": [
+              {
+                "ref": {
+                  "name": "int",
+                  "refId": "int"
+                },
+                "kind": "param",
+                "name": "value",
+                "id": "value"
+              }
+            ],
+            "id": "b=1()"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "comment": "Creates a new CommentTester with aNumber set to 0.\n\nThis method's doc uses the `///` form of doc comment.\nAdjacent `///` lines become\na single doc comment block. \nAdding a space at the end of the line\n (or 2 spaces after the `///`)\n is a workaround for a bug in the HTML generation.",
+            "name": "CommentTester",
+            "id": "CommentTester0()"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "comment": "This is the doc comment for CommentTester.withNumber.",
+            "name": "CommentTester.withNumber",
+            "children": [
+              {
+                "ref": {
+                  "name": "int",
+                  "refId": "int"
+                },
+                "kind": "param",
+                "name": "aNumber",
+                "id": "aNumber"
+              }
+            ],
+            "id": "CommentTester.withNumber1()"
+          },
+          {
+            "returnType": {
+              "name": "void",
+              "refId": "void"
+            },
+            "kind": "method",
+            "comment": "This is the doc comment for doSomething().",
+            "name": "doSomething",
+            "id": "doSomething0()"
+          },
+          {
+            "ref": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "property",
+            "comment": "This doc comment on a's getter shows up fine,\nand can cover both the getter and the setter.\nCompare this to the getter-less [aNumber]\n(any visible doc comment there?) and to [b],\nwhich has comments on both the getter and the setter.",
+            "name": "a",
+            "id": "a"
+          },
+          {
+            "ref": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "property",
+            "comment": "\nThis is a comment on b's getter.\n",
+            "name": "b",
+            "id": "b"
+          },
+          {
+            "ref": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "property",
+            "name": "aNumber",
+            "id": "aNumber"
+          },
+          {
+            "ref": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "property",
+            "name": "_a",
+            "id": "_a"
+          },
+          {
+            "ref": {
+              "name": "int",
+              "refId": "int"
+            },
+            "kind": "property",
+            "name": "_b",
+            "id": "_b"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "comment": "Creates a new CommentTester with aNumber set to 0.\n\nThis method's doc uses the `///` form of doc comment.\nAdjacent `///` lines become\na single doc comment block. \nAdding a space at the end of the line\n (or 2 spaces after the `///`)\n is a workaround for a bug in the HTML generation.",
+            "name": "CommentTester",
+            "id": "CommentTester0()"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "comment": "This is the doc comment for CommentTester.withNumber.",
+            "name": "CommentTester.withNumber",
+            "children": [
+              {
+                "ref": {
+                  "name": "int",
+                  "refId": "int"
+                },
+                "kind": "param",
+                "name": "aNumber",
+                "id": "aNumber"
+              }
+            ],
+            "id": "CommentTester.withNumber1()"
+          }
+        ],
+        "id": "CommentTester"
+      }
+    ],
+    "id": "file:///Users/kathyw/Spot/dart-doc-testing/CommentTest.dart"
+  }
+]

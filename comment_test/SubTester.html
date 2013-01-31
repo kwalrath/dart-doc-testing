@@ -36,9 +36,10 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>This is the doc comment for the SubTester class.</p>
 <pre class="source">
 class SubTester extends CommentTester {
-  SubTester();
+ SubTester();
 }
 </pre>
 </div>
@@ -60,6 +61,26 @@ SubTester();
 </div>
 <div class="inherited">
 <h3>Properties</h3>
+<div class="field inherited"><h4 id="a">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_core/int.html">int</a>         <strong>a</strong> <a class="anchor-link"
+            href="#a"
+            title="Permalink to SubTester.a">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../comment_test/CommentTester.html">CommentTester</a> </div><div class="doc">
+<p>This doc comment on a's getter shows up fine,
+and can cover both the getter and the setter.
+Compare this to the getter-less <code>aNumber</code>
+(any visible doc comment there?) and to <code>b</code>,
+which has comments on both the getter and the setter.</p>
+<pre class="source">
+int get a =&gt; _a;
+</pre>
+<pre class="source">
+set a(int value) =&gt; _a = value;
+</pre>
+</div>
+</div>
 <div class="field inherited"><h4 id="aNumber">
 <button class="show-code">Code</button>
 <a href="http://api.dartlang.org/dart_core/int.html">int</a>         <strong>aNumber</strong> <a class="anchor-link"
@@ -68,7 +89,32 @@ SubTester();
         </h4>
         <div class="inherited-from">inherited from <a href="../comment_test/CommentTester.html">CommentTester</a> </div><div class="doc">
 <pre class="source">
-int aNumber;
+aNumber
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="b">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_core/int.html">int</a> <strong>get b</strong> <a class="anchor-link" href="#b"
+              title="Permalink to SubTester.get b">#</a></h4>
+<div class="inherited-from">inherited from <a href="../comment_test/CommentTester.html">CommentTester</a> </div><div class="doc">
+<p>This is a comment on b's getter.</p>
+<pre class="source">
+int get b =&gt; _b;
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="b=">
+<button class="show-code">Code</button>
+<strong>set b</strong>(<a href="http://api.dartlang.org/dart_core/int.html">int</a> value) <a class="anchor-link" href="#b="
+              title="Permalink to SubTester.set b">#</a></h4>
+<div class="inherited-from">inherited from <a href="../comment_test/CommentTester.html">CommentTester</a> </div><div class="doc">
+<p>This, unfortunately, is a comment on b's setter.
+Don't do this!</p>
+<p><strong>Note:</strong> It's better to comment only on the getter,
+so the docs for the property will be all in one place.</p>
+<pre class="source">
+set b(int value) =&gt; _b = value;
 </pre>
 </div>
 </div>
@@ -80,9 +126,10 @@ int aNumber;
 void <strong>doSomething</strong>() <a class="anchor-link" href="#doSomething"
               title="Permalink to SubTester.doSomething">#</a></h4>
 <div class="inherited-from">inherited from <a href="../comment_test/CommentTester.html">CommentTester</a> </div><div class="doc">
+<p>This is the doc comment for doSomething().</p>
 <pre class="source">
 void doSomething() {
-  print('The number is $aNumber.');
+ print('The number is $aNumber.');
 }
 </pre>
 </div>
@@ -91,9 +138,8 @@ void doSomething() {
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2012-11-12 15:15:33.319</div>
+          <div>This page was generated at 2013-01-30 16:22:31.004</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>
