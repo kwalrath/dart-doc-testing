@@ -28,17 +28,15 @@ This article covers event loops in both web apps, which use the regular browser 
 
 Here's an example of handling a click on an HTML element:
 
-{{{
-void main() {
-  // ...
-  anElement.on.click.add(handleClick);
-  // ...
-}
-
-void handleClick(Event event) {
-  // Do something quickly.
-}
-}}}
+    void main() {
+      // ...
+      anElement.on.click.add(handleClick);
+      // ...
+    }
+    
+    void handleClick(Event event) {
+      // Do something quickly.
+    }
 
 That's fine, but what if completely
 handling the click might take a long time?
@@ -51,38 +49,36 @@ to perform the long-running operation in the background.
 The Dart solution for background processing is to spawn an
 [isolate](http://www.dartlang.org/docs/dart-up-and-running/contents/ch03.html#ch03-dartisolate---concurrency-with-isolates).
 
-{{{
-import 'dart:isolate';
-
-void main() {
-  // ...
-  anElement.on.click.add(handleClick);
-  // ...
-}
-
-void handleClick(Event event) {
-  // Create an isolate. XXX: Here or in main? Maybe it depends?
-  var sendPort = spawnFunction(doWork);
-
-  // Send it any data it needs to start working.
-  sendPort.call('data').then((results) {
-    displayResults(results);
-  });
-
-  // ...Update the UI to tell the user that the work has started...
-}
-
-void doWork() {
-  port.receive(msg, replyTo) {
-    // Do some possibly lengthy work here.
-    if (replyTo != null) {
-      replyTo.send('done!');
-  }
-}
-void displayResults(String results) {
-  // ...The work is done, so now update the UI to reflect the results.
-}
-}}}
+    import 'dart:isolate';
+    
+    void main() {
+      // ...
+      anElement.on.click.add(handleClick);
+      // ...
+    }
+    
+    void handleClick(Event event) {
+      // Create an isolate. XXX: Here or in main? Maybe it depends?
+      var sendPort = spawnFunction(doWork);
+    
+      // Send it any data it needs to start working.
+      sendPort.call('data').then((results) {
+        displayResults(results);
+      });
+    
+      // ...Update the UI to tell the user that the work has started...
+    }
+    
+    void doWork() {
+      port.receive(msg, replyTo) {
+        // Do some possibly lengthy work here.
+        if (replyTo != null) {
+          replyTo.send('done!');
+      }
+    }
+    void displayResults(String results) {
+      // ...The work is done, so now update the UI to reflect the results.
+    }
 
 Note: When a Dart web app is compiled to JavaScript,
 the isolate becomes a web worker.
@@ -115,7 +111,7 @@ Example: a network server
 
 Picture:
 
-|click|key|key|click|isolate msg|click|...
+    |click|key|key|click|isolate msg|click|...
 
 ### The event loop
 
